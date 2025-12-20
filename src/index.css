@@ -1,0 +1,129 @@
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  /* Family Friendly Palette - Pastels & Soft Tones */
+  --bg-color: #fdfbf7;
+  /* Warm off-white */
+  --text-primary: #475569;
+  /* Slate 600 - softer than black */
+  --text-secondary: #94a3b8;
+  /* Slate 400 */
+
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --card-border: #f1f5f9;
+
+  /* Feature Colors */
+  --color-sleep: #e0e7ff;
+  /* Indigo 100 */
+  --text-sleep: #4338ca;
+  /* Indigo 700 */
+
+  --color-feed: #fce7f3;
+  /* Pink 100 */
+  --text-feed: #be185d;
+  /* Pink 700 */
+
+  --color-diaper: #dcfce7;
+  /* Green 100 */
+  --text-diaper: #15803d;
+  /* Green 700 */
+
+  --color-doctor: #fef3c7;
+  /* Amber 100 */
+  --text-doctor: #b45309;
+  /* Amber 700 */
+
+  --primary-btn: #6366f1;
+  --primary-btn-text: #ffffff;
+
+  --error-color: #ef4444;
+
+  --radius-lg: 24px;
+  /* More rounded */
+  --radius-md: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Card Styles - clean, card-like, no glassmorphism */
+.glass-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  /* Override previously set glass styles if any remain on element style */
+  backdrop-filter: none !important;
+}
+
+.btn-primary {
+  background: var(--primary-btn);
+  color: var(--primary-btn-text);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
+}
+
+.input-field {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  color: var(--text-primary);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary-btn);
+  background: #fff;
+}
+
+.full-screen-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+}
+
+/* Spinner */
+.spinner {
+  border-color: rgba(99, 102, 241, 0.1) !important;
+  border-left-color: var(--primary-btn) !important;
+}

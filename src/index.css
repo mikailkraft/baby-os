@@ -29,13 +29,13 @@
   --text-diaper: #16a34a;
   /* Green 700ish */
 
-  --color-doctor: #fffbeb;
-  /* Yellow/Amber 50 */
+  --color-doctor: #fde68a;
+  /* Darkened Yellow 100 -> 200ish */
   --text-doctor: #d97706;
   /* Yellow/Amber 700ish */
 
-  --primary-btn: #add8e6;
-  --primary-btn-text: #1e293b;
+  --primary-btn: #87bdd0;
+  --primary-btn-text: #ffffff;
 
   --error-color: #ef4444;
 
@@ -80,12 +80,12 @@ input {
   color: var(--primary-btn-text);
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 4px rgba(173, 216, 230, 0.4);
+  box-shadow: 0 2px 4px rgba(135, 189, 208, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(173, 216, 230, 0.6);
+  box-shadow: 0 4px 6px rgba(135, 189, 208, 0.6);
 }
 
 .input-field {

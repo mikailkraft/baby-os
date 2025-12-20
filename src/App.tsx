@@ -1,38 +1,19 @@
-import { useState, useEffect } from 'react';
-import { ConfigScreen } from './components/ConfigScreen';
+import React from 'react';
+import { LandingPage } from './components/LandingPage';
 import { Dashboard } from './components/Dashboard';
 
-function App() {
-  const [config, setConfig] = useState<{ url: string; password?: string } | null>(null);
+// Simple router check for dev vs prod/landing
+// If URL contains 'dashboard', show dashboard (for dev testing or if user prefers)
+// Otherwise ensure LandingPage is the default entry
+const App: React.FC = () => {
+  // Check if we are in "Dashboard Mode" via query param or if we are the preserved baby-os.html file
+  const isDashboardArtifact = window.location.pathname.endsWith('baby-os.html') || window.location.search.includes('mode=dashboard');
 
-  useEffect(() => {
-    const storedUrl = localStorage.getItem('baby_os_url');
-    const storedPassword = localStorage.getItem('baby_os_password');
-    if (storedUrl) {
-      setConfig({ url: storedUrl, password: storedPassword || undefined });
-    }
-  }, []);
-
-  const handleSaveConfig = (url: string, password?: string) => {
-    localStorage.setItem('baby_os_url', url);
-    if (password) {
-      localStorage.setItem('baby_os_password', password);
-    } else {
-      localStorage.removeItem('baby_os_password');
-    }
-    setConfig({ url, password });
-  };
-
-  if (!config) {
-    return (
-      <ConfigScreen
-        onSave={handleSaveConfig}
-        initialUrl="https://connect.craft.do/links/GGOK4suYOHT/api/v1"
-      />
-    );
+  if (isDashboardArtifact) {
+    return <Dashboard />;
   }
 
-  return <Dashboard />;
-}
+  return <LandingPage />;
+};
 
 export default App;

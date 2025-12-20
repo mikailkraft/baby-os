@@ -68,7 +68,7 @@ export const LandingPage: React.FC = () => {
                         <ShortcutButton label="Record Nap" color="#87bdd0" icon="🌙" url="https://www.icloud.com/shortcuts/8230347433554469ac2fc78db3b94153" />
                         <ShortcutButton label="Log Feed" color="#ef91a1" icon="🍼" url="https://www.icloud.com/shortcuts/bae1c8289b974f7ba334380ac1919580" />
                         <ShortcutButton label="Log Diaper" color="#77d477" icon="🧷" url="https://www.icloud.com/shortcuts/7255023a6fdf4e73b0d7dcd37f5339e8" />
-                        <ShortcutButton label="Doctor Visit" color="#efd358" icon="🩺" />
+                        <ShortcutButton label="Doctor Visit" color="#efd358" icon="🩺" url="https://www.icloud.com/shortcuts/7760098de7254dc78cb424d48d198fd7" />
                         <ShortcutButton label="Handoff" color="#f9b577" icon="🤝" />
                         <ShortcutButton label="Daily Summary" color="#f4df58" icon="📅" url="https://www.icloud.com/shortcuts/94267b322dc3467dbc9e699ccd14f7ad" />
                     </div>

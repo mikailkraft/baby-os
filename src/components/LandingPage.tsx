@@ -5,59 +5,93 @@ export const LandingPage: React.FC = () => {
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', fontFamily: 'var(--font-family)', color: 'var(--text-primary)' }}>
             <header style={{ textAlign: 'center', marginBottom: '60px' }}>
-                <div style={{ fontSize: '4rem', marginBottom: '16px' }}>👶</div>
-                <h1 style={{ fontSize: '3rem', fontWeight: 800, margin: '0 0 16px 0', background: 'linear-gradient(135deg, #6366f1, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <div style={{ fontSize: '4rem', marginBottom: '8px', animation: 'float 3s ease-in-out infinite' }}>👶</div>
+                <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0 0 16px 0', letterSpacing: '-0.02em', background: 'linear-gradient(135deg, #6366f1, #f472b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                     Baby OS
                 </h1>
-                <p style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    The Operating System for your Newborn.
+                <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', lineHeight: 1.5, maxWidth: '600px', margin: '0 auto' }}>
+                    The sanity-saving, sleep-tracking, data-crunching dashboard for your newest family member.
                 </p>
+                <style>{`
+                    @keyframes float {
+                        0% { transform: translateY(0px); }
+                        50% { transform: translateY(-10px); }
+                        100% { transform: translateY(0px); }
+                    }
+                `}</style>
             </header>
 
-            <div style={{ display: 'grid', gap: '32px' }}>
-                <Card title="Get Started" icon="🚀">
-                    <p style={{ marginBottom: '24px', lineHeight: 1.6 }}>
-                        Baby OS is a single-file dashboard that lives in your browser and connects to your private Craft document. No servers. No subscriptions. Just you and your data.
+            <div style={{ display: 'grid', gap: '48px' }}>
+                <section>
+                    <h2 style={{ fontSize: '1.8rem', marginBottom: '24px', textAlign: 'center' }}>Get Set Up in Seconds</h2>
+                    <div style={{ display: 'grid', mdGridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                        <Card title="1. The Brain" icon="🧠">
+                            <p style={{ marginBottom: '20px', lineHeight: 1.6 }}>
+                                You'll need a place to store all that data. Grab our free Craft template to get started.
+                            </p>
+                            <a href="https://docs.mikail.zip/LZf9m2MeFth7Pr" target="_blank" rel="noopener noreferrer"
+                                className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: '#3b82f6' }}>
+                                Duplicate Template
+                            </a>
+                        </Card>
+                        <Card title="2. The Dashboard" icon="✨">
+                            <p style={{ marginBottom: '20px', lineHeight: 1.6 }}>
+                                The magic interface. Download it, open it, and watch your chaos turn into clarity.
+                            </p>
+                            <a href="baby-os.html" download="index.html"
+                                className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+                                Download HTML
+                            </a>
+                        </Card>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 style={{ fontSize: '1.8rem', marginBottom: '24px', textAlign: 'center' }}>One-Tap Logging</h2>
+                    <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '32px', maxWidth: '500px', margin: '0 auto 32px' }}>
+                        Because nobody has time to type when they're holding a bottle with one hand and a baby with the other.
                     </p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        <a href="https://docs.mikail.zip/LZf9m2MeFth7Pr" target="_blank" rel="noopener noreferrer"
-                            className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: '#3b82f6' }}>
-                            1. Get the Craft Template
-                        </a>
-                        <a href="/baby-os.html" download="index.html"
-                            className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
-                            2. Download Dashboard
-                        </a>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '20px', justifyContent: 'center' }}>
+                        <ShortcutButton label="Record Nap" color="#0ea5e9" icon="🌙" /> {/* Sky Blue */}
+                        <ShortcutButton label="Log Feed" color="#f97316" icon="🍼" /> {/* Orange */}
+                        <ShortcutButton label="Log Diaper" color="#84cc16" icon="🧷" /> /* Lime */
+                        <ShortcutButton label="Doctor Visit" color="#fbbf24" icon="🩺" /> {/* Amber */}
+                        <ShortcutButton label="Handoff" color="#94a3b8" icon="🤝" /> {/* Slate */}
+                        <ShortcutButton label="Weekly Review" color="#a855f7" icon="📅" /> {/* Purple */}
                     </div>
-                </Card>
+                </section>
 
-                <Card title="Shortcuts" icon="⚡️">
-                    <p style={{ marginBottom: '24px', color: 'var(--text-secondary)' }}>
-                        Add these to your iPhone for one-tap logging.
+                <section style={{ background: '#f8fafc', padding: '32px', borderRadius: '24px', border: '1px solid #e2e8f0' }}>
+                    <h2 style={{ fontSize: '1.8rem', marginBottom: '16px', textAlign: 'center' }}>📱 Install as App</h2>
+                    <p style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--text-secondary)' }}>
+                        Make it feel like a native app on your iPhone.
                     </p>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px' }}>
-                        <ShortcutButton label="Log Nap" color="#818cf8" icon="🌙" />
-                        <ShortcutButton label="Log Feed" color="#f472b6" icon="🍼" />
-                        <ShortcutButton label="Log Diaper" color="#4ade80" icon="👶" />
-                        <ShortcutButton label="Log Appt" color="#fbbf24" icon="🩺" />
-                        <ShortcutButton label="Handoff" color="#94a3b8" icon="🤝" />
-                        <ShortcutButton label="Review" color="#a78bfa" icon="📊" />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                            <div style={{ width: '32px', height: '32px', background: '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>1</div>
+                            <span>Open the downloaded <strong>baby-os.html</strong> on your phone.</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                            <div style={{ width: '32px', height: '32px', background: '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>2</div>
+                            <span>Tap the <strong>Share</strong> button (box with arrow up).</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                            <div style={{ width: '32px', height: '32px', background: '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>3</div>
+                            <span>Scroll down and tap <strong>Add to Home Screen</strong>.</span>
+                        </div>
                     </div>
-                </Card>
+                </section>
 
-                <Card title="Resources" icon="📚">
-                    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                        <a href="https://github.com/mikailkraft/baby-os" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-btn)', textDecoration: 'none', fontWeight: 500 }}>
-                            View on GitHub →
-                        </a>
-                    </div>
-                </Card>
-
-                <div style={{ textAlign: 'center', marginTop: '40px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <footer style={{ textAlign: 'center', marginTop: '40px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                     <p>
-                        Created by <a href="https://github.com/mikailkraft" style={{ color: 'inherit', textDecoration: 'underline' }}>Mikail</a>.
+                        Made with <span style={{ color: '#ef4444' }}>❤️</span> and sleep deprivation by <a href="https://github.com/mikailkraft" style={{ color: 'inherit', textDecoration: 'underline' }}>Mikail</a>.
                     </p>
-                </div>
+                    <p style={{ marginTop: '8px' }}>
+                        <a href="https://github.com/mikailkraft/baby-os" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 500 }}>
+                            View on GitHub
+                        </a>
+                    </p>
+                </footer>
             </div>
         </div>
     );
@@ -67,18 +101,36 @@ const ShortcutButton: React.FC<{ label: string; color: string; icon: string }> =
     <a href="#" style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
+        justifyContent: 'space-between',
+        padding: '16px',
         background: color,
         color: 'white',
-        borderRadius: '24px',
+        borderRadius: '22px', // Apple-ish rounded corners
         textDecoration: 'none',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        transition: 'transform 0.2s',
-        fontWeight: 600
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        aspectRatio: '1 / 1',
+        transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        position: 'relative',
+        overflow: 'hidden'
     }}>
-        <span style={{ fontSize: '2rem', marginBottom: '8px' }}>{icon}</span>
-        <span style={{ fontSize: '0.9rem' }}>{label}</span>
+        <div style={{ fontSize: '1.8rem' }}>{icon}</div>
+        <div style={{
+            fontSize: '1rem',
+            fontWeight: 700,
+            lineHeight: 1.2,
+            marginTop: 'auto'
+        }}>
+            {label}
+        </div>
+        {/* Shine effect */}
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)',
+            pointerEvents: 'none'
+        }} />
     </a>
 );

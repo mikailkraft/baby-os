@@ -59,7 +59,10 @@ export const LandingPage: React.FC = () => {
                 </section>
 
                 <section>
-                    <h2 style={{ fontSize: '1.8rem', marginBottom: '24px', textAlign: 'center' }}>One-Tap Logging</h2>
+                    <h2 style={{ fontSize: '1.8rem', marginBottom: '8px', textAlign: 'center' }}>One-Tap Logging</h2>
+                    <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '0.9rem' }}>
+                        Note: You only need to answer the setup questions for the <strong>first</strong> shortcut. You can skip them for all others!
+                    </p>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', justifyContent: 'center' }}>
                         <ShortcutButton label="Record Nap" color="#87bdd0" icon="🌙" /> {/* Extra Darkened Baby Blue */}

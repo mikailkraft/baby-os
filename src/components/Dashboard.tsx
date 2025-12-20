@@ -35,7 +35,7 @@ export const Dashboard: React.FC = () => {
                     <div className="spinner" style={{
                         width: '40px', height: '40px',
                         border: '4px solid rgba(255,255,255,0.1)',
-                        borderLeftColor: '#6366f1',
+                        borderLeftColor: 'var(--primary-btn)',
                         borderRadius: '50%',
                         animation: 'spin 1s linear infinite'
                     }} />

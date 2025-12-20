@@ -6,7 +6,7 @@ export const LandingPage: React.FC = () => {
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', fontFamily: 'var(--font-family)', color: 'var(--text-primary)' }}>
             <header style={{ textAlign: 'center', marginBottom: '60px' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '8px', animation: 'float 3s ease-in-out infinite' }}>👶</div>
-                <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0 0 16px 0', letterSpacing: '-0.02em', background: 'linear-gradient(135deg, #6366f1, #f472b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0 0 16px 0', letterSpacing: '-0.02em', background: 'linear-gradient(135deg, #add8e6, #ffc0cb)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                     Baby OS
                 </h1>
                 <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', lineHeight: 1.5, maxWidth: '600px', margin: '0 auto' }}>
@@ -42,7 +42,7 @@ export const LandingPage: React.FC = () => {
                                 You'll need a place to store all that data. Grab our free Craft template to get started.
                             </p>
                             <a href="https://docs.mikail.zip/LZf9m2MeFth7Pr" target="_blank" rel="noopener noreferrer"
-                                className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: '#3b82f6' }}>
+                                className="btn-primary" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', background: '#add8e6', color: '#1e293b' }}>
                                 Duplicate Template
                             </a>
                         </Card>
@@ -64,12 +64,12 @@ export const LandingPage: React.FC = () => {
                         Because nobody has time to type when they're holding a bottle with one hand and a baby with the other.
                     </p>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', justifyContent: 'center' }}>
-                        <ShortcutButton label="Record Nap" color="#0ea5e9" icon="🌙" /> {/* Sky Blue */}
-                        <ShortcutButton label="Log Feed" color="#f97316" icon="🍼" /> {/* Orange */}
-                        <ShortcutButton label="Log Diaper" color="#84cc16" icon="🧷" /> {/* Lime */}
-                        <ShortcutButton label="Doctor Visit" color="#fbbf24" icon="🩺" /> {/* Amber */}
-                        <ShortcutButton label="Handoff" color="#94a3b8" icon="🤝" /> {/* Slate */}
-                        <ShortcutButton label="Weekly Review" color="#a855f7" icon="📅" /> {/* Purple */}
+                        <ShortcutButton label="Record Nap" color="#add8e6" icon="🌙" /> {/* Baby Blue */}
+                        <ShortcutButton label="Log Feed" color="#ffc0cb" icon="🍼" /> {/* Pink */}
+                        <ShortcutButton label="Log Diaper" color="#90ee90" icon="🧷" /> {/* Green */}
+                        <ShortcutButton label="Doctor Visit" color="#ffec8b" icon="🩺" /> {/* Yellow */}
+                        <ShortcutButton label="Handoff" color="#fed7aa" icon="🤝" /> {/* Peach/Yellowish */}
+                        <ShortcutButton label="Weekly Review" color="#fef08a" icon="📅" /> {/* Light Yellow */}
                     </div>
                 </section>
 
@@ -144,7 +144,7 @@ const ShortcutButton: React.FC<{ label: string; color: string; icon: string }> =
         justifyContent: 'space-between',
         padding: '16px',
         background: color,
-        color: 'white',
+        color: '#1e293b', // Darker text for better contrast on pastels
         borderRadius: '22px', // Apple-ish rounded corners
         textDecoration: 'none',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',

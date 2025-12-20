@@ -14,28 +14,28 @@
   --card-border: #f1f5f9;
 
   /* Feature Colors */
-  --color-sleep: #e0e7ff;
-  /* Indigo 100 */
-  --text-sleep: #4338ca;
-  /* Indigo 700 */
+  --color-sleep: #f0f9ff;
+  /* Baby Blue 50 */
+  --text-sleep: #0ea5e9;
+  /* Baby Blue 700ish */
 
-  --color-feed: #fce7f3;
-  /* Pink 100 */
-  --text-feed: #be185d;
-  /* Pink 700 */
+  --color-feed: #fff1f2;
+  /* Pink 50 */
+  --text-feed: #e11d48;
+  /* Pink 700ish */
 
-  --color-diaper: #dcfce7;
-  /* Green 100 */
-  --text-diaper: #15803d;
-  /* Green 700 */
+  --color-diaper: #f0fdf4;
+  /* Green 50 */
+  --text-diaper: #16a34a;
+  /* Green 700ish */
 
-  --color-doctor: #fef3c7;
-  /* Amber 100 */
-  --text-doctor: #b45309;
-  /* Amber 700 */
+  --color-doctor: #fffbeb;
+  /* Yellow/Amber 50 */
+  --text-doctor: #d97706;
+  /* Yellow/Amber 700ish */
 
-  --primary-btn: #6366f1;
-  --primary-btn-text: #ffffff;
+  --primary-btn: #add8e6;
+  --primary-btn-text: #1e293b;
 
   --error-color: #ef4444;
 
@@ -80,12 +80,12 @@ input {
   color: var(--primary-btn-text);
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 2px 4px rgba(173, 216, 230, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 6px rgba(173, 216, 230, 0.6);
 }
 
 .input-field {
@@ -124,6 +124,6 @@ h3 {
 
 /* Spinner */
 .spinner {
-  border-color: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(59, 130, 246, 0.1) !important;
   border-left-color: var(--primary-btn) !important;
 }

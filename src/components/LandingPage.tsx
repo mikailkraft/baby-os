@@ -65,12 +65,12 @@ export const LandingPage: React.FC = () => {
                     </p>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', justifyContent: 'center' }}>
-                        <ShortcutButton label="Record Nap" color="#87bdd0" icon="🌙" /> {/* Extra Darkened Baby Blue */}
-                        <ShortcutButton label="Log Feed" color="#ef91a1" icon="🍼" /> {/* Extra Darkened Pink */}
-                        <ShortcutButton label="Log Diaper" color="#77d477" icon="🧷" /> {/* Extra Darkened Green */}
-                        <ShortcutButton label="Doctor Visit" color="#efd358" icon="🩺" /> {/* Extra Darkened Yellow */}
-                        <ShortcutButton label="Handoff" color="#f9b577" icon="🤝" /> {/* Extra Darkened Peach */}
-                        <ShortcutButton label="Weekly Review" color="#f4df58" icon="📅" /> {/* Extra Darkened Light Yellow */}
+                        <ShortcutButton label="Record Nap" color="#87bdd0" icon="🌙" url="https://www.icloud.com/shortcuts/8230347433554469ac2fc78db3b94153" />
+                        <ShortcutButton label="Log Feed" color="#ef91a1" icon="🍼" url="https://www.icloud.com/shortcuts/bae1c8289b974f7ba334380ac1919580" />
+                        <ShortcutButton label="Log Diaper" color="#77d477" icon="🧷" url="https://www.icloud.com/shortcuts/7255023a6fdf4e73b0d7dcd37f5339e8" />
+                        <ShortcutButton label="Doctor Visit" color="#efd358" icon="🩺" />
+                        <ShortcutButton label="Handoff" color="#f9b577" icon="🤝" />
+                        <ShortcutButton label="Daily Summary" color="#f4df58" icon="📅" url="https://www.icloud.com/shortcuts/94267b322dc3467dbc9e699ccd14f7ad" />
                     </div>
                 </section>
 
@@ -138,8 +138,8 @@ export const LandingPage: React.FC = () => {
     );
 };
 
-const ShortcutButton: React.FC<{ label: string; color: string; icon: string }> = ({ label, color, icon }) => (
-    <a href="#" style={{
+const ShortcutButton: React.FC<{ label: string; color: string; icon: string; url?: string }> = ({ label, color, icon, url = '#' }) => (
+    <a href={url} target="_blank" rel="noopener noreferrer" style={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',

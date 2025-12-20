@@ -5,11 +5,28 @@ import { FeedWidget } from './FeedWidget';
 import { DiaperWidget } from './DiaperWidget';
 import { PediatricianWidget } from './PediatricianWidget';
 
+import { ConfigScreen } from './ConfigScreen';
+
 export const Dashboard: React.FC = () => {
     const url = localStorage.getItem('baby_os_url') || '';
     const password = localStorage.getItem('baby_os_password') || undefined;
 
     const { data, loading, error, refresh } = useBabyData(url, password);
+
+    const handleSaveConfig = (newUrl: string, newPassword?: string) => {
+        localStorage.setItem('baby_os_url', newUrl);
+        if (newPassword) {
+            localStorage.setItem('baby_os_password', newPassword);
+        } else {
+            localStorage.removeItem('baby_os_password');
+        }
+        // Force a reload to pick up the new config and restart the hook
+        window.location.reload();
+    };
+
+    if (!url) {
+        return <ConfigScreen onSave={handleSaveConfig} />;
+    }
 
     if (loading) {
         return (

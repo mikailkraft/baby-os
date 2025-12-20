@@ -23,7 +23,10 @@ export const useBabyData = (url: string, password?: string): UseBabyDataResult =
     const [error, setError] = useState<string | null>(null);
 
     const fetchData = useCallback(async () => {
-        if (!url) return;
+        if (!url) {
+            setLoading(false);
+            return;
+        }
 
         setLoading(true);
         setError(null);

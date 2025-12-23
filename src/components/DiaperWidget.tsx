@@ -1,24 +1,26 @@
 import React from 'react';
 import { Card } from './Card';
 import type { DiaperEvent } from '../types';
-import { formatDistanceToNow, isToday } from 'date-fns';
+import { formatDistanceToNow, format } from 'date-fns';
 
 interface DiaperWidgetProps {
     events: DiaperEvent[];
     minDiapers?: number;
+    onAdd?: () => void;
 }
 
-export const DiaperWidget: React.FC<DiaperWidgetProps> = ({ events, minDiapers = 6 }) => {
+export const DiaperWidget: React.FC<DiaperWidgetProps> = ({ events, minDiapers = 6, onAdd }) => {
+    const todayStr = format(new Date(), 'yyyy-MM-dd');
     const sortedEvents = [...events].sort((a, b) => {
         return (b.date + b.time).localeCompare(a.date + a.time);
     });
 
     const lastEvent = sortedEvents[0];
-    const todayEvents = sortedEvents.filter(e => isToday(new Date(e.date)));
+    const todayEvents = sortedEvents.filter(e => e.date === todayStr);
 
     let timeSinceLast = 'Unknown';
     if (lastEvent) {
-        const dateTimeStr = `${lastEvent.date} ${lastEvent.time}`;
+        const dateTimeStr = `${lastEvent.date} ${lastEvent.time}`.replace(/\s+/g, ' ');
         const lastDate = new Date(dateTimeStr);
         if (!isNaN(lastDate.getTime())) {
             timeSinceLast = formatDistanceToNow(lastDate, { addSuffix: true });
@@ -26,8 +28,36 @@ export const DiaperWidget: React.FC<DiaperWidgetProps> = ({ events, minDiapers =
     }
 
     return (
-        <Card title="Diapers" icon="👶" accentColor="var(--text-diaper)">
+        <Card
+            title="Diapers"
+            icon="👶"
+            accentColor="var(--text-diaper)"
+            headerAction={
+                <button
+                    onClick={onAdd}
+                    className="add-btn"
+                    style={{
+                        background: 'var(--color-diaper)',
+                        color: 'var(--text-diaper)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '32px',
+                        height: '32px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        fontSize: '1.2rem',
+                        fontWeight: 'bold',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                >
+                    +
+                </button>
+            }
+        >
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+
                 <div style={{ background: 'var(--color-diaper)', padding: '16px', borderRadius: 'var(--radius-md)', color: 'var(--text-diaper)' }}>
                     <div style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '4px' }}>
                         Last Change

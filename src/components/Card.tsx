@@ -6,9 +6,10 @@ interface CardProps {
     children: React.ReactNode;
     className?: string;
     accentColor?: string;
+    headerAction?: React.ReactNode;
 }
 
-export const Card: React.FC<CardProps> = ({ title, icon, children, className = '', accentColor }) => {
+export const Card: React.FC<CardProps> = ({ title, icon, children, className = '', accentColor, headerAction }) => {
     return (
         <div className={`glass-panel ${className}`} style={{ padding: '24px', position: 'relative', overflow: 'hidden' }}>
             {accentColor && (
@@ -21,9 +22,12 @@ export const Card: React.FC<CardProps> = ({ title, icon, children, className = '
                     background: accentColor,
                 }} />
             )}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-                {icon && <div style={{ fontSize: '1.5rem' }}>{icon}</div>}
-                <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700 }}>{title}</h2>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    {icon && <div style={{ fontSize: '1.5rem' }}>{icon}</div>}
+                    <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700 }}>{title}</h2>
+                </div>
+                {headerAction}
             </div>
             <div>
                 {children}
@@ -31,3 +35,4 @@ export const Card: React.FC<CardProps> = ({ title, icon, children, className = '
         </div>
     );
 };
+

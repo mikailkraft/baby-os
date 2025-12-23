@@ -1,14 +1,16 @@
 import React from 'react';
 import { Card } from './Card';
 import type { SleepEvent } from '../types';
-import { formatDistanceToNow, isToday } from 'date-fns';
+import { formatDistanceToNow, format } from 'date-fns';
 
 interface SleepWidgetProps {
     events: SleepEvent[];
     wakeWindowLimit?: number;
+    onAdd?: () => void;
 }
 
-export const SleepWidget: React.FC<SleepWidgetProps> = ({ events, wakeWindowLimit = 120 }) => {
+export const SleepWidget: React.FC<SleepWidgetProps> = ({ events, wakeWindowLimit = 120, onAdd }) => {
+    const todayStr = format(new Date(), 'yyyy-MM-dd');
     const sortedEvents = [...events].sort((a, b) => {
         return (b.date + b.startTime).localeCompare(a.date + a.startTime);
     });
@@ -16,18 +18,19 @@ export const SleepWidget: React.FC<SleepWidgetProps> = ({ events, wakeWindowLimi
     const lastSleep = sortedEvents[0];
     const isSleeping = lastSleep && !lastSleep.endTime && !lastSleep.duration;
 
-    const todaySleeps = sortedEvents.filter(e => isToday(new Date(e.date)));
+    const todaySleeps = sortedEvents.filter(e => e.date === todayStr);
     const totalSleepMinutes = todaySleeps.reduce((acc, curr) => acc + (curr.duration || 0), 0);
 
     const hours = Math.floor(totalSleepMinutes / 60);
     const minutes = totalSleepMinutes % 60;
+
 
     let wakeWindowStr = 'Unknown';
     let isWindowExceeded = false;
     let wakeMinutes = 0;
 
     if (lastSleep && !isSleeping && lastSleep.endTime) {
-        const dateTimeStr = `${lastSleep.date} ${lastSleep.endTime}`;
+        const dateTimeStr = `${lastSleep.date} ${lastSleep.endTime}`.replace(/\s+/g, ' ');
         const lastSleepEnd = new Date(dateTimeStr);
         if (!isNaN(lastSleepEnd.getTime())) {
             wakeWindowStr = formatDistanceToNow(lastSleepEnd, { addSuffix: false });
@@ -38,8 +41,36 @@ export const SleepWidget: React.FC<SleepWidgetProps> = ({ events, wakeWindowLimi
     }
 
     return (
-        <Card title="Sleep Tracking" icon="🌙" accentColor="var(--color-sleep)">
+        <Card
+            title="Sleep Tracking"
+            icon="🌙"
+            accentColor="var(--color-sleep)"
+            headerAction={
+                <button
+                    onClick={onAdd}
+                    className="add-btn"
+                    style={{
+                        background: 'var(--color-sleep)',
+                        color: 'var(--text-sleep)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '32px',
+                        height: '32px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        fontSize: '1.2rem',
+                        fontWeight: 'bold',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                >
+                    +
+                </button>
+            }
+        >
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+
                 <div style={{ background: 'var(--color-sleep)', padding: '16px', borderRadius: 'var(--radius-md)', color: 'var(--text-sleep)' }}>
                     <div style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '4px' }}>
                         Current Status

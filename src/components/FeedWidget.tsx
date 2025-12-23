@@ -1,30 +1,34 @@
 import React from 'react';
 import { Card } from './Card';
 import type { FeedEvent } from '../types';
-import { formatDistanceToNow, isToday } from 'date-fns';
+import { formatDistanceToNow, format } from 'date-fns';
 
 interface FeedWidgetProps {
     events: FeedEvent[];
     unit?: string;
     minFeeds?: number;
+    onAdd?: () => void;
 }
 
-export const FeedWidget: React.FC<FeedWidgetProps> = ({ events, unit = 'oz', minFeeds = 8 }) => {
+export const FeedWidget: React.FC<FeedWidgetProps> = ({ events, unit = 'oz', minFeeds = 8, onAdd }) => {
+    const todayStr = format(new Date(), 'yyyy-MM-dd');
     const sortedEvents = [...events].sort((a, b) => {
         return (b.date + b.time).localeCompare(a.date + a.time);
     });
 
     const lastFeed = sortedEvents[0];
-    const todayFeeds = sortedEvents.filter(e => isToday(new Date(e.date)));
+    const todayFeeds = sortedEvents.filter(e => e.date === todayStr);
 
     const totalAmount = todayFeeds.reduce((acc, curr) => {
-        const amount = parseFloat(curr.amount || '0');
+        // Strip out the unit if it's already in the amount string
+        const amountStr = (curr.amount || '').replace(new RegExp(`\\s*${unit}$`, 'i'), '').trim();
+        const amount = parseFloat(amountStr);
         return acc + (isNaN(amount) ? 0 : amount);
     }, 0);
 
     let timeSinceLast = 'Unknown';
     if (lastFeed) {
-        const dateTimeStr = `${lastFeed.date} ${lastFeed.time}`;
+        const dateTimeStr = `${lastFeed.date} ${lastFeed.time}`.replace(/\s+/g, ' ');
         const lastFeedDate = new Date(dateTimeStr);
         if (!isNaN(lastFeedDate.getTime())) {
             timeSinceLast = formatDistanceToNow(lastFeedDate, { addSuffix: true });
@@ -32,8 +36,36 @@ export const FeedWidget: React.FC<FeedWidgetProps> = ({ events, unit = 'oz', min
     }
 
     return (
-        <Card title="Feeds" icon="🍼" accentColor="var(--text-feed)">
+        <Card
+            title="Feeds"
+            icon="🍼"
+            accentColor="var(--text-feed)"
+            headerAction={
+                <button
+                    onClick={onAdd}
+                    className="add-btn"
+                    style={{
+                        background: 'var(--color-feed)',
+                        color: 'var(--text-feed)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '32px',
+                        height: '32px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        fontSize: '1.2rem',
+                        fontWeight: 'bold',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                >
+                    +
+                </button>
+            }
+        >
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+
                 <div style={{ background: 'var(--color-feed)', padding: '16px', borderRadius: 'var(--radius-md)', color: 'var(--text-feed)' }}>
                     <div style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '4px' }}>
                         Last Feed
@@ -43,10 +75,11 @@ export const FeedWidget: React.FC<FeedWidgetProps> = ({ events, unit = 'oz', min
                     </div>
                     {lastFeed && (
                         <div style={{ fontSize: '0.85rem', marginTop: '4px', opacity: 0.9 }}>
-                            {lastFeed.amount ? `${lastFeed.amount} ${unit} (Approx)` : lastFeed.type.join(', ')}
+                            {(lastFeed.amount || '').replace(new RegExp(`\\s*${unit}$`, 'i'), '').trim() ? `${lastFeed.amount.replace(new RegExp(`\\s*${unit}$`, 'i'), '').trim()} ${unit} (Approx)` : lastFeed.type.join(', ')}
                         </div>
                     )}
                 </div>
+
 
                 <div style={{ background: '#f8fafc', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid #e2e8f0' }}>
                     <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>

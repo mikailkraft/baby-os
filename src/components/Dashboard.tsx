@@ -1,31 +1,47 @@
-import React from 'react';
+import { useState } from 'react';
 import { useBabyData } from '../hooks/useBabyData';
 import { SleepWidget } from './SleepWidget';
 import { FeedWidget } from './FeedWidget';
 import { DiaperWidget } from './DiaperWidget';
 import { PediatricianWidget } from './PediatricianWidget';
-
 import { ConfigScreen } from './ConfigScreen';
+import { LogModal } from './LogModal';
 
 export const Dashboard: React.FC = () => {
     const url = localStorage.getItem('baby_os_url') || '';
     const password = localStorage.getItem('baby_os_password') || undefined;
+    const parentName = localStorage.getItem('baby_os_parent_name') || '';
 
-    const { data, loading, error, refresh } = useBabyData(url, password);
+    const { data, loading, error, refresh, addItem, updateItem } = useBabyData(url, password);
+    const [modalState, setModalState] = useState<{ isOpen: boolean, type: 'sleep' | 'feed' | 'diaper' }>({
+        isOpen: false,
+        type: 'sleep'
+    });
 
-    const handleSaveConfig = (newUrl: string, newPassword?: string) => {
+    const activeSleep = data?.sleep.find(s => !s.endTime);
+
+    const handleSaveConfig = (newUrl: string, newPassword?: string, newParentName?: string) => {
         localStorage.setItem('baby_os_url', newUrl);
         if (newPassword) {
             localStorage.setItem('baby_os_password', newPassword);
         } else {
             localStorage.removeItem('baby_os_password');
         }
+        if (newParentName) {
+            localStorage.setItem('baby_os_parent_name', newParentName);
+        } else {
+            localStorage.removeItem('baby_os_parent_name');
+        }
         // Force a reload to pick up the new config and restart the hook
         window.location.reload();
     };
 
+    const openModal = (type: 'sleep' | 'feed' | 'diaper') => {
+        setModalState({ isOpen: true, type });
+    };
+
     if (!url) {
-        return <ConfigScreen onSave={handleSaveConfig} />;
+        return <ConfigScreen onSave={handleSaveConfig} initialUrl={url} initialPassword={password} initialParentName={parentName} />;
     }
 
     if (loading) {
@@ -91,11 +107,35 @@ export const Dashboard: React.FC = () => {
             </header>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
-                <SleepWidget events={data.sleep} wakeWindowLimit={data.settings?.wakeWindowLimit} />
-                <FeedWidget events={data.feeds} unit={data.settings?.feedUnit} minFeeds={data.settings?.minFeeds} />
-                <DiaperWidget events={data.diapers} minDiapers={data.settings?.minDiapers} />
+                <SleepWidget
+                    events={data.sleep}
+                    wakeWindowLimit={data.settings?.wakeWindowLimit}
+                    onAdd={() => openModal('sleep')}
+                />
+                <FeedWidget
+                    events={data.feeds}
+                    unit={data.settings?.feedUnit}
+                    minFeeds={data.settings?.minFeeds}
+                    onAdd={() => openModal('feed')}
+                />
+                <DiaperWidget
+                    events={data.diapers}
+                    minDiapers={data.settings?.minDiapers}
+                    onAdd={() => openModal('diaper')}
+                />
                 <PediatricianWidget appointments={data.appointments} notes={data.doctorNotes} />
             </div>
+
+            <LogModal
+                isOpen={modalState.isOpen}
+                onClose={() => setModalState({ ...modalState, isOpen: false })}
+                type={modalState.type}
+                onSubmit={addItem}
+                onUpdate={updateItem}
+                activeSleep={activeSleep}
+                parentName={parentName}
+            />
         </div>
     );
 };
+

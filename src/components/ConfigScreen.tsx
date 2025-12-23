@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
 interface ConfigScreenProps {
-  onSave: (url: string, password?: string) => void;
+  onSave: (url: string, password?: string, parentName?: string) => void;
   initialUrl?: string;
   initialPassword?: string;
+  initialParentName?: string;
 }
 
-export const ConfigScreen: React.FC<ConfigScreenProps> = ({ onSave, initialUrl = '', initialPassword = '' }) => {
+export const ConfigScreen: React.FC<ConfigScreenProps> = ({ onSave, initialUrl = '', initialPassword = '', initialParentName = '' }) => {
   const [url, setUrl] = useState(initialUrl);
   const [password, setPassword] = useState(initialPassword);
+  const [parentName, setParentName] = useState(initialParentName);
   const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,7 +27,7 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({ onSave, initialUrl =
       return;
     }
     setError('');
-    onSave(url, password);
+    onSave(url, password, parentName);
   };
 
   return (
@@ -60,6 +62,19 @@ export const ConfigScreen: React.FC<ConfigScreenProps> = ({ onSave, initialUrl =
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              Parent Name
+            </label>
+            <input
+              type="text"
+              className="input-field"
+              value={parentName}
+              onChange={(e) => setParentName(e.target.value)}
+              placeholder="e.g. Mom"
             />
           </div>
 
